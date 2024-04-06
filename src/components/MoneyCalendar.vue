@@ -8,14 +8,21 @@
     <div class="calendar__head-cell">Сб</div>
     <div class="calendar__head-cell">Вс</div>
     <div class="cell--empty" v-for="n in numberEmptyCells" :key="n"></div>
-    <div class="cell" v-for="n in numberDaysInMonth" :key="n">
+    <calendar-cell
+      class="cell"
+      v-for="n in numberDaysInMonth"
+      :key="n"
+      :date="new Date(date.getFullYear(), date.getMonth(), n)"
+    >
       {{ n }}
-    </div>
+    </calendar-cell>
   </div>
 </template>
 
 <script>
+import CalendarCell from "./CalendarCell.vue";
 export default {
+  components: { CalendarCell },
   props: {
     date: Date,
   },
@@ -35,6 +42,9 @@ export default {
       ).getDay();
       if (firstDayOfWeek === 0) firstDayOfWeek = 7;
       return firstDayOfWeek - 1;
+    },
+    dayUrl() {
+      return `day/${+this.date}`;
     },
   },
 };
