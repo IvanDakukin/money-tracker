@@ -1,13 +1,15 @@
 <template>
-  <div class="main">
+  <div>
     <div class="year">{{ year }}</div>
     <button @click="decreaseMonth">&lt;</button>
     {{ month }}
     <button @click="increaseMonth">&gt;</button>
+    <Calendar :date="date"></Calendar>
   </div>
 </template>
 
 <script>
+import Calendar from "@/components/MoneyCalendar.vue";
 const months = [
   "Январь",
   "Февраль",
@@ -28,6 +30,9 @@ export default {
     return {
       date: new Date(),
     };
+  },
+  components: {
+    Calendar,
   },
   methods: {
     increaseMonth() {
@@ -56,10 +61,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.calendar {
-  width: 900px;
-  display: grid;
-  grid-template-rows: repeat(5, 100px);
-  grid-template-columns: repeat(7, 1fr);
-}
 </style>
