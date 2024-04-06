@@ -52,11 +52,6 @@ export default {
       return months[this.date.getMonth()];
     },
   },
-  watch: {
-    curDate() {
-      console.log("asdasd");
-    },
-  },
 };
 </script>
 
