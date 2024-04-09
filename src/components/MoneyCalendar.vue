@@ -10,11 +10,18 @@
       <div class="calendar-head__element">Вс</div>
     </div>
     <div class="calendar-body">
-      <div
-        class="cell cell--empty"
-        v-for="n in numberEmptyCellsStart"
+      <calendar-cell
+        class="cell cell--other-month"
+        v-for="n in numberCellsStart"
         :key="n"
-      ></div>
+        :date="
+          new Date(
+            date.getFullYear(),
+            date.getMonth(),
+            n - numberCellsStart
+          )
+        "
+      ></calendar-cell>
       <calendar-cell
         class="cell"
         v-for="n in numberDaysInMonth"
@@ -22,11 +29,12 @@
         :date="new Date(date.getFullYear(), date.getMonth(), n)"
       >
       </calendar-cell>
-      <div
-        class="cell cell--empty"
-        v-for="n in numberEmptyCellsEnd"
+      <calendar-cell
+        class="cell cell--other-month"
+        v-for="n in numberCellsEnd"
         :key="n"
-      ></div>
+        :date="new Date(date.getFullYear(), date.getMonth() + 1, n)"
+      ></calendar-cell>
     </div>
   </div>
 </template>
@@ -46,7 +54,7 @@ export default {
         0
       ).getDate();
     },
-    numberEmptyCellsStart() {
+    numberCellsStart() {
       let firstDayOfWeek = new Date(
         this.date.getFullYear(),
         this.date.getMonth(),
@@ -55,7 +63,7 @@ export default {
       if (firstDayOfWeek === 0) firstDayOfWeek = 7;
       return firstDayOfWeek - 1;
     },
-    numberEmptyCellsEnd() {
+    numberCellsEnd() {
       let lastDayOfMonth = new Date(
         this.date.getFullYear(),
         this.date.getMonth() + 1,
@@ -105,6 +113,9 @@ export default {
   }
   &:nth-last-child(7) {
     border-bottom-left-radius: 15px;
+  }
+  &--other-month {
+    color: $light-grey;
   }
 }
 </style>

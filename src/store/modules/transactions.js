@@ -21,7 +21,7 @@ export default {
       },
       {
         id: 3,
-        date: new Date("09-22-2024"),
+        date: new Date("05-01-2024"),
         sum: -500.25,
         title: "Продукты",
       },
