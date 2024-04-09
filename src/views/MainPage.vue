@@ -5,12 +5,17 @@
         <span class="date-chose__year">{{ date.getFullYear()}}</span>
       </div>
       <div class="date-chose__item">
-        <button @click="decreaseMonth" class="date-chose__btn">
+        <button @click="switchToToday" class="date-chose__today">
+          Сегодня
+        </button>
+      </div>
+      <div class="date-chose__item">
+        <button @click="decreaseMonth" class="date-chose__arrow">
           <span class="material-symbols-outlined"> keyboard_arrow_left </span>
         </button>
       </div>
       <div class="date-chose__item">
-        <button @click="increaseMonth" class="date-chose__btn">
+        <button @click="increaseMonth" class="date-chose__arrow">
           <span class="material-symbols-outlined"> keyboard_arrow_right </span>
         </button>
       </div>
@@ -59,6 +64,9 @@ export default {
       this.date.setMonth(this.date.getMonth() - 1);
       this.date = new Date(this.date);
     },
+    switchToToday() {
+      this.date = new Date();
+    }
   },
   computed: {
     month() {
@@ -84,7 +92,7 @@ export default {
     align-items: center;
   }
   &__year {
-    margin-right: 40px;
+    margin-right: 20px;
     line-height: 100%;
     font: {
       size: 30px;
@@ -95,11 +103,16 @@ export default {
     margin-left: 10px;
     font-size: 18px;
   }
-  &__btn {
+  &__arrow {
     @extend %text-button;
     display: flex;
     align-items: center;
     padding: 5px;
+  }
+  &__today {
+    @extend %tonal-button;
+    padding: 5px;
+    margin-right: 10px;
   }
 }
 </style>
