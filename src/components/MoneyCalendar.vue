@@ -1,21 +1,33 @@
 <template>
   <div class="calendar">
-    <div class="calendar__head-cell">Пн</div>
-    <div class="calendar__head-cell">Вт</div>
-    <div class="calendar__head-cell">Ср</div>
-    <div class="calendar__head-cell">Чт</div>
-    <div class="calendar__head-cell">Пт</div>
-    <div class="calendar__head-cell">Сб</div>
-    <div class="calendar__head-cell">Вс</div>
-    <div class="cell--empty" v-for="n in numberEmptyCells" :key="n"></div>
-    <calendar-cell
-      class="cell"
-      v-for="n in numberDaysInMonth"
-      :key="n"
-      :date="new Date(date.getFullYear(), date.getMonth(), n)"
-    >
-      {{ n }}
-    </calendar-cell>
+    <div class="calendar-head">
+      <div class="calendar-head__element">Пн</div>
+      <div class="calendar-head__element">Вт</div>
+      <div class="calendar-head__element">Ср</div>
+      <div class="calendar-head__element">Чт</div>
+      <div class="calendar-head__element">Пт</div>
+      <div class="calendar-head__element">Сб</div>
+      <div class="calendar-head__element">Вс</div>
+    </div>
+    <div class="calendar-body">
+      <div
+        class="cell cell--empty"
+        v-for="n in numberEmptyCellsStart"
+        :key="n"
+      ></div>
+      <calendar-cell
+        class="cell"
+        v-for="n in numberDaysInMonth"
+        :key="n"
+        :date="new Date(date.getFullYear(), date.getMonth(), n)"
+      >
+      </calendar-cell>
+      <div
+        class="cell cell--empty"
+        v-for="n in numberEmptyCellsEnd"
+        :key="n"
+      ></div>
+    </div>
   </div>
 </template>
 
@@ -34,7 +46,7 @@ export default {
         0
       ).getDate();
     },
-    numberEmptyCells() {
+    numberEmptyCellsStart() {
       let firstDayOfWeek = new Date(
         this.date.getFullYear(),
         this.date.getMonth(),
@@ -43,18 +55,58 @@ export default {
       if (firstDayOfWeek === 0) firstDayOfWeek = 7;
       return firstDayOfWeek - 1;
     },
-    dayUrl() {
-      return `day/${+this.date}`;
+    numberEmptyCellsEnd() {
+      let lastDayOfMonth = new Date(
+        this.date.getFullYear(),
+        this.date.getMonth() + 1,
+        0
+      ).getDay();
+      if (lastDayOfMonth === 0) {
+        lastDayOfMonth = 7;
+      }
+      return 7 - lastDayOfMonth;
     },
   },
 };
 </script>
 
-<style scoped>
-.calendar {
-  width: 900px;
+<style lang="scss" scoped >
+@import "@/assets/scss/main.scss";
+
+.calendar-head {
+  display: flex;
+  margin-bottom: 10px;
+  &__element {
+    font-weight: bold;
+    width: 100%;
+    padding-left: 5px;
+    font-size: 18px;
+  }
+}
+.calendar-body {
+  border-left: $thin-border;
+  border-top: $thin-border;
+  border-radius: 15px;
   display: grid;
-  grid-template-rows: repeat(6, 100px);
   grid-template-columns: repeat(7, 1fr);
+}
+
+.cell {
+  border-bottom: $thin-border;
+  border-right: $thin-border;
+  height: 100px;
+  padding: 5px;
+  &:nth-child(1) {
+    border-top-left-radius: 15px;
+  }
+  &:nth-child(7) {
+    border-top-right-radius: 15px;
+  }
+  &:nth-last-child(1) {
+    border-bottom-right-radius: 15px;
+  }
+  &:nth-last-child(7) {
+    border-bottom-left-radius: 15px;
+  }
 }
 </style>
