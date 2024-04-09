@@ -2,7 +2,7 @@
   <div class="main-content">
     <div class="date-chose">
       <div class="date-chose__item">
-        <span class="date-chose__year">{{ date.getFullYear()}}</span>
+        <span class="date-chose__year">{{ date.getFullYear() }}</span>
       </div>
       <div class="date-chose__item">
         <button @click="switchToToday" class="date-chose__today">
@@ -66,7 +66,7 @@ export default {
     },
     switchToToday() {
       this.date = new Date();
-    }
+    },
   },
   computed: {
     month() {
@@ -77,7 +77,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/main.scss";
 .main-content {
   padding-top: 10px;
   flex-basis: 100%;

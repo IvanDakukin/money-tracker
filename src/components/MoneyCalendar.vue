@@ -71,8 +71,6 @@ export default {
 </script>
 
 <style lang="scss" scoped >
-@import "@/assets/scss/main.scss";
-
 .calendar-head {
   display: flex;
   margin-bottom: 10px;
