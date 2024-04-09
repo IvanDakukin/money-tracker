@@ -9,8 +9,8 @@
       </div>
     </div>
     <div class="cell__transactions">
-      <div class="income" v-if="sumIncome">Доход: {{ sumIncome }}</div>
-      <div class="expences" v-if="sumExpences">Расход: {{ sumExpences }}</div>
+      <div class="income" v-if="sumIncome">{{ sumIncome }}</div>
+      <div class="expences" v-if="sumExpences">{{ sumExpences }}</div>
     </div>
   </div>
 </template>
@@ -95,7 +95,7 @@ export default {
 }
 .income,
 .expences {
-  font-size: 15px;
+  font-size: 13px;
   padding-left: 5px;
 }
 .income {
