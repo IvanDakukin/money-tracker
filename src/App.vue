@@ -62,7 +62,6 @@ body {
 
   &__item {
     @extend %text-button;
-    cursor: pointer;
     text-align: start;
     padding: 13px 10px;
     margin: 5px;

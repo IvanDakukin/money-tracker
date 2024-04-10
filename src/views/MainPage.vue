@@ -78,9 +78,7 @@ export default {
 
 <style lang="scss" scoped>
 .main-content {
-  padding-top: 10px;
-  flex-basis: 100%;
-  margin-right: 20px;
+  @extend %main-content;
 }
 
 .date-chose {

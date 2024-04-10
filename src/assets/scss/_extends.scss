@@ -5,10 +5,12 @@
 }
 
 %button {
-  opacity: .75;
+  user-select: none;
+  cursor: pointer;
+  opacity: 0.75;
   text-align: center;
   border-radius: 8px;
-  transition: background-color .2s, color .2s;
+  transition: background-color 0.2s, color 0.2s;
   &:hover {
     opacity: 1;
   }
@@ -28,3 +30,8 @@
   color: $main-color;
 }
 
+%main-content {
+  padding-top: 10px;
+  flex-basis: 100%;
+  margin-right: 20px;
+}
