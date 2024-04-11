@@ -2,7 +2,7 @@
   <form class="form">
     <div class="form__element">
       <label for="sum">Сумма</label>
-      <input type="text" id="sum" class="form__field" v-model="sum" />
+      <input type="number" id="sum" class="form__field" v-model="sum"/>
     </div>
     <div class="form__element">
       <label for="title">Заголовок</label>
@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import store from "@/store";
 
 export default {
   data() {
@@ -39,12 +38,12 @@ export default {
     addTransaction() {
       const sum = this.type === "income" ? this.sum : -this.sum;
       const transaction = {
-        id: store.getters.nextId,
+        id: this.$store.getters.nextId,
         date: this.date,
         sum,
         title: this.title,
       };
-      store.dispatch("addTransaction", transaction);
+      this.$store.dispatch("addTransaction", transaction);
     },
   },
 };
