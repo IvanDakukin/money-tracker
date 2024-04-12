@@ -5,7 +5,9 @@
         {{ date.getDate() }}
       </div>
       <div class="add-button">
-        <router-link class="date-link" :to="dayUrl"> + </router-link>
+        <router-link class="date-link" :to="dayUrl">
+          <span class="material-symbols-outlined"> data_saver_on </span>
+        </router-link>
       </div>
     </div>
     <div class="cell__transactions">

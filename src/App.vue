@@ -1,10 +1,11 @@
 <template>
   <header class="header">
+    <span class="material-symbols-outlined header__menu-btn" @click="toggleMenu"> menu </span>
     <span class="header__title">Money Tracker</span>
   </header>
 
   <main class="main">
-    <aside class="aside">
+    <aside class="aside" :class="{'aside--closed': !menuIsOpen}">
       <nav class="nav">
         <div class="nav__header">Навигация</div>
         <ul>
@@ -18,6 +19,21 @@
   </main>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      menuIsOpen: true,
+    }
+  },
+  methods: {
+    toggleMenu() {
+      this.menuIsOpen = !this.menuIsOpen;
+    },
+  },
+};
+</script>
+
 <style lang="scss">
 body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -26,10 +42,16 @@ body {
 .header {
   @extend %box_shadow;
   height: 60px;
-  padding: 15px 0 15px 40px;
+  padding: 15px 0 15px 0;
   background-color: $main-color;
   display: flex;
   align-items: center;
+
+  &__menu-btn {
+    @extend %button;
+    color: $light-color;
+    margin: 0 10px;
+  }
 
   &__title {
     font-size: 35px;
@@ -47,9 +69,13 @@ body {
 }
 
 .aside {
+  display: block;
+  &--closed {
+    display: none;
+  }
   min-width: 200px;
   border-right: $thin-border;
-  margin-right: 20px;
+  height: 100vh;
 }
 
 .nav {
