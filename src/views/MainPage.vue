@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import Calendar from "@/components/MoneyCalendar.vue";
+import Calendar from "@/components/Calendar/MoneyCalendar.vue";
 const months = [
   "Январь",
   "Февраль",

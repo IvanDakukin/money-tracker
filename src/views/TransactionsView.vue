@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import TransactionsForm from "@/components/TransactionsForm.vue";
+import TransactionsForm from "@/components/DayTransactions/TransactionsForm.vue";
 import Formatter from "@/utils/Formatter";
 
 export default {
