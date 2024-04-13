@@ -85,8 +85,7 @@ export default {
   display: flex;
   margin-bottom: 15px;
   &__item {
-    display: flex;
-    align-items: center;
+    @extend %vert-center;
   }
   &__year {
     margin-right: 20px;
@@ -102,8 +101,7 @@ export default {
   }
   &__arrow {
     @extend %text-button;
-    display: flex;
-    align-items: center;
+    @extend %vert-center;
     padding: 5px;
   }
   &__today {

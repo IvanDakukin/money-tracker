@@ -52,6 +52,9 @@ button,
 select {
   font-family: inherit;
   font-size: inherit;
+  border: none;
+  outline: none;
+  background-color: transparent;
 }
 
 input::-ms-clear {
@@ -68,4 +71,5 @@ input[type="submit"] {
 
 label {
   cursor: pointer;
+  user-select: none;
 }

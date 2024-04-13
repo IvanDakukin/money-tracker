@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       menuIsOpen: true,
-    }
+    };
   },
   methods: {
     toggleMenu() {
@@ -35,17 +35,18 @@ export default {
 </script>
 
 <style lang="scss">
+
 body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
+
 .header {
-  @extend %box_shadow;
+  @extend %box-shadow;
+  @extend %vert-center;
   height: 60px;
-  padding: 15px 0 15px 0;
+  padding: 15px 0;
   background-color: $main-color;
-  display: flex;
-  align-items: center;
 
   &__menu-btn {
     @extend %button;
@@ -70,19 +71,20 @@ body {
 
 .aside {
   display: block;
-  &--closed {
-    display: none;
-  }
   min-width: 200px;
   border-right: $thin-border;
   height: 100vh;
+
+  &--closed {
+    display: none;
+  }
 }
 
 .nav {
   &__header {
     font-weight: bolder;
     font-size: 18px;
-    padding: 10px 10px;
+    padding: 10px;
     border-bottom: $thin-border;
   }
 

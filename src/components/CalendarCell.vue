@@ -54,9 +54,6 @@ export default {
 
 <style lang="scss" scoped>
 .cell {
-  display: flex;
-  flex-direction: column;
-
   &:hover .add-button {
     opacity: 1;
   }
@@ -69,9 +66,7 @@ export default {
 }
 
 .date-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %center;
   width: 28px;
   height: 26px;
   border-radius: 8px;
@@ -91,7 +86,6 @@ export default {
   opacity: 0;
   width: 28px;
   height: 26px;
-  font-weight: bold;
   transition: opacity 0.2s;
   margin-right: 3px;
 }
