@@ -1,11 +1,18 @@
 <template>
   <header class="header">
-    <span class="material-symbols-outlined header__menu-btn" @click="toggleMenu"> menu </span>
-    <span class="header__title">Money Tracker</span>
+    <span
+      class="material-symbols-outlined header__menu-btn"
+      @click="toggleMenu"
+    >
+      menu
+    </span>
+    <router-link to="/" class="header__link">
+      <span class="header__title">Money Tracker</span>
+    </router-link>
   </header>
 
   <main class="main">
-    <aside class="aside" :class="{'aside--closed': !menuIsOpen}">
+    <aside class="aside" :class="{ 'aside--closed': !menuIsOpen }">
       <nav class="nav">
         <div class="nav__header">Навигация</div>
         <ul>
@@ -52,6 +59,10 @@ body {
     @extend %button;
     color: $light-color;
     margin: 0 10px;
+  }
+
+  &__link {
+    text-decoration: none;
   }
 
   &__title {
