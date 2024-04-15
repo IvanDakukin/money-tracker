@@ -22,7 +22,7 @@ export default {
         title: "Продукты",
       },
       {
-        id: 3,
+        id: 4 ,
         date: new Date("05-01-2024"),
         sum: -500.25,
         title: "Продукты",
@@ -56,18 +56,35 @@ export default {
       const index = state.transactions.findIndex(
         (transaction) => transaction.id === id
       );
-      if(index !== -1) {
+      if (index !== -1) {
         state.transactions.splice(index, 1);
+      }
+    },
+    setTransaction(state, transaction) {
+      const index = state.transactions.findIndex(
+        (tr) => tr.id === transaction.id
+      );
+      console.log(index);
+      if (index !== -1) {
+        state.transactions[index] = new Transaction(
+          transaction.id,
+          transaction.date,
+          transaction.sum,
+          transaction.title
+        );
       }
     },
   },
 
   actions: {
-    addTransaction({ commit }, transaction) {
-      commit("addTransaction", transaction);
+    addTransaction({ commit, getters }, transaction) {
+      commit("addTransaction", { id: getters.nextId, ...transaction });
     },
     deleteTransaction({ commit }, id) {
       commit("deleteTransaction", id);
+    },
+    editTransaction({ commit }, transaction) {
+      commit("setTransaction", transaction);
     },
   },
 };

@@ -1,70 +1,184 @@
 <template>
-  <form class="form">
-    <div class="form__element">
-      <label for="sum">Сумма</label>
-      <input type="number" id="sum" class="form__field" v-model="sum"/>
+  <div class="wrapper">
+    <div class="options">
+      <div
+        class="option"
+        :class="{ 'option--active': operationType === 'add' }"
+        @click="resetOperation"
+      >
+        Добавить
+      </div>
+      <div
+        class="option"
+        :class="{
+          'option--active': operationType === 'edit',
+          'option--disabled': operationType !== 'edit',
+        }"
+      >
+        Изменить
+      </div>
     </div>
-    <div class="form__element">
-      <label for="title">Заголовок</label>
-      <input type="text" id="title" class="form__field" v-model="title" />
-    </div>
-    <div class="form__element">
-      <label for="transaction-type">Тип транзакции</label>
-      <select id="transaction-type" v-model="type">
-        <option value="income">Доход</option>
-        <option value="expense">Расход</option>
-      </select>
-    </div>
-    <div class="form__element">
-      <input type="submit" value="Добавить" @click.prevent="addTransaction" />
-    </div>
-  </form>
+    <form class="form">
+      <div class="form__element">
+        <input
+          type="text"
+          id="sum"
+          class="form__field"
+          v-model="transaction.sum"
+          placeholder="Cумма"
+        />
+      </div>
+      <div class="form__element">
+        <input
+          type="text"
+          id="title"
+          class="form__field"
+          v-model="transaction.title"
+          placeholder="Заголовок"
+        />
+      </div>
+      <div class="form__element">
+        <select
+          id="transaction-type"
+          v-model="transaction.type"
+          class="form__select"
+        >
+          <option value="income">Доход</option>
+          <option value="expense">Расход</option>
+        </select>
+      </div>
+      <div class="form__element">
+        <input
+          type="submit"
+          value="Сохранить"
+          class="form__submit"
+          @click.prevent="handleSubmit"
+        />
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
+import Transaction from "@/model/Transaction";
 
 export default {
   data() {
     return {
-      sum: 0,
-      title: "",
-      type: "",
+      transaction: {
+        sum: "",
+        title: "",
+        date: this.date,
+        type: "income",
+      },
+      operationType: "add",
     };
   },
   props: {
+    initTransaction: Transaction,
     date: Date,
   },
   methods: {
-    addTransaction() {
-      const sum = this.type === "income" ? this.sum : -this.sum;
+    handleSubmit() {
+      // TODO: валидация формы
       const transaction = {
-        id: this.$store.getters.nextId,
-        date: this.date,
-        sum,
-        title: this.title,
+        ...this.transaction,
+        sum:
+          this.transaction.type === "income"
+            ? +(+this.transaction.sum).toFixed(2)
+            : -+(+this.transaction.sum).toFixed(2),
       };
-      this.$store.dispatch("addTransaction", transaction);
+      console.log(typeof transaction.sum);
+      if (this.operationType == "add") {
+        this.$store.dispatch("addTransaction", transaction);
+      } else if (this.operationType == "edit") {
+        this.$store.dispatch("editTransaction", transaction);
+      }
+      this.resetOperation();
+    },
+    resetOperation() {
+      this.transaction = {
+        sum: "",
+        title: "",
+        date: this.date,
+        type: "income",
+      };
+      this.operationType = "add";
+    },
+  },
+  watch: {
+    initTransaction(newTransaction) {
+      this.transaction = { ...newTransaction };
+      this.transaction.type = newTransaction.sum > 0 ? "income" : "expense";
+      this.transaction.sum = Math.abs(newTransaction.sum);
+      this.operationType = "edit";
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-.form {
+.wrapper {
+  margin-left: auto;
+  margin-right: 40px;
+}
+.options {
   display: flex;
-  flex-direction: column;
-  padding: 15px;
-
+  background-color: $main-color;
+}
+.option {
+  color: $light-color;
+  padding: 7px 10px;
+  user-select: none;
+  cursor: pointer;
+  &--active {
+    border-bottom: 2px solid $light-color;
+    background-color: lighten($main-color, 7);
+  }
+  &--disabled {
+    opacity: 0.3;
+  }
+}
+.form {
+  padding: 15px 15px 1px 15px;
+  width: 300px;
+  border: $thin-border;
   &__element {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   &__field {
-    padding: 3px;
+    padding: 10px 7px;
+    border-bottom: 1px solid lighten($main-color, 30);
+    transition: border 0.1s;
+    border: $thin-border;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    width: 100%;
+
+    &:hover {
+      border-bottom: 1px solid lighten($main-color, 20);
+    }
+    &:focus {
+      border-bottom: 2px solid $main-color;
+    }
   }
 
-  label {
-    margin-right: 10px;
+  &__select {
+    border-bottom: 1px solid lighten($main-color, 30);
+    padding: 1px;
+    padding: 5px;
+    border-bottom: $thin-border;
+    cursor: pointer;
+    width: 50%;
+    &:hover {
+      border-bottom: 1px solid lighten($main-color, 20);
+    }
+  }
+
+  &__submit {
+    @extend %flat-button;
+    padding: 6px 7px;
   }
 }
 </style>

@@ -42,7 +42,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -57,8 +56,12 @@ body {
 
   &__menu-btn {
     @extend %button;
+    opacity: 0.8;
     color: $light-color;
     margin: 0 10px;
+    &:hover {
+      opacity: 1;
+    }
   }
 
   &__link {
@@ -77,15 +80,13 @@ body {
 
 .main {
   display: flex;
-  height: 100vh;
 }
 
 .aside {
   display: block;
-  min-width: 200px;
+  min-width: 250px;
+  min-height: 100vh;
   border-right: $thin-border;
-  height: 100vh;
-
   &--closed {
     display: none;
   }

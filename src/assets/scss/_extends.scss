@@ -1,20 +1,23 @@
+// тени
 %box-shadow {
   -webkit-box-shadow: 0px 13px 18px -16px rgba(66, 68, 90, 1);
   -moz-box-shadow: 0px 13px 18px -16px rgba(66, 68, 90, 1);
   box-shadow: 0px 13px 18px -16px rgba(66, 68, 90, 1);
 }
 
+%box-shadow-bottom {
+  -webkit-box-shadow: 0px 4px 18px -10px rgba(66, 68, 90, 1);
+  -moz-box-shadow: 0px 4px 18px -10px rgba(66, 68, 90, 1);
+  box-shadow: 0px 5px 18px -10px rgba(66, 68, 90, 1);
+}
+
 // кнопки
 %button {
   user-select: none;
   cursor: pointer;
-  opacity: 0.75;
   text-align: center;
   border-radius: 8px;
   transition: background-color 0.2s, color 0.2s;
-  &:hover {
-    opacity: 1;
-  }
 }
 
 %text-button {
@@ -27,8 +30,21 @@
 
 %tonal-button {
   @extend %button;
+  opacity: 0.8;
   background-color: $secondary-color;
   color: $main-color;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+%flat-button {
+  @extend %button;
+  background-color: $main-color;
+  color: $light-color;
+  &:hover {
+    background-color: lighten($main-color, 5);
+  }
 }
 
 // контейнеры
@@ -36,7 +52,7 @@
 %main-content {
   padding-top: 10px;
   flex-basis: 100%;
-  margin: 0 20px;
+  margin: 0 40px;
 }
 
 %vert-center {

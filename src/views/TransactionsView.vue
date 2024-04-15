@@ -36,7 +36,10 @@
                     >
                   </div>
                   <div class="manage">
-                    <span class="material-symbols-outlined manage__edit">
+                    <span
+                      class="material-symbols-outlined manage__edit"
+                      @click="editingTransaction = {...inc}"
+                    >
                       edit
                     </span>
                     <span
@@ -77,12 +80,15 @@
                   <div class="data">
                     <span class="data__title"> {{ expence.title }}</span>
                     <span class="data__sum data__sum--expence">
-                      {{ expence.sum }}</span
+                      {{ -expence.sum }}</span
                     >
                   </div>
 
                   <div class="manage">
-                    <span class="material-symbols-outlined manage__edit">
+                    <span
+                      class="material-symbols-outlined manage__edit"
+                      @click="editingTransaction = {...expence}"
+                    >
                       edit
                     </span>
                     <span
@@ -99,8 +105,7 @@
           </div>
         </div>
       </div>
-
-      <TransactionsForm :date="date" />
+      <TransactionsForm :init-transaction="editingTransaction" :date="date" />
     </div>
   </div>
 </template>
@@ -115,6 +120,7 @@ export default {
     return {
       incomeIsOpen: true,
       expencesIsOpen: true,
+      editingTransaction: null,
     };
   },
   props: {
@@ -132,12 +138,7 @@ export default {
       return this.transactions.filter((transaction) => transaction.sum > 0);
     },
     expences() {
-      return this.transactions
-        .filter((transaction) => transaction.sum < 0)
-        .map((transaction) => ({
-          ...transaction,
-          sum: Math.abs(transaction.sum),
-        }));
+      return this.transactions.filter((transaction) => transaction.sum < 0);
     },
     formatedDate() {
       return Formatter.dateToSentense(this.date);
@@ -173,7 +174,7 @@ export default {
 }
 
 .transactions {
-  width: 400px;
+  width: 420px;
   margin-right: 30px;
 
   &__opener {
