@@ -61,7 +61,8 @@ export default {
   actions: {
     async fetchTransactions({ commit }) {
       try {
-        commit("setTransactions", await api.transactions());
+        const fetchData = await api.transactions();
+        commit("setTransactions", fetchData.transactions);
       } catch (e) {
         console.error(e);
       }
@@ -69,7 +70,7 @@ export default {
     async postTransaction({ commit }, transaction) {
       try {
         const postedTransaction = await api.postTransaction(transaction);
-        commit("addTransaction",  postedTransaction);
+        commit("addTransaction",  postedTransaction.transaction);
       } catch (e) {
         console.error(e);
       }
