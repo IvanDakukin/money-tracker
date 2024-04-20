@@ -88,9 +88,8 @@ export default {
             ? +(+this.transaction.sum).toFixed(2)
             : -+(+this.transaction.sum).toFixed(2),
       };
-      console.log(typeof transaction.sum);
       if (this.operationType == "add") {
-        this.$store.dispatch("addTransaction", transaction);
+        this.$store.dispatch("postTransaction", transaction);
       } else if (this.operationType == "edit") {
         this.$store.dispatch("editTransaction", transaction);
       }
