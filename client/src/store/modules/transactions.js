@@ -2,6 +2,7 @@ import Transaction from "@/model/Transaction";
 import api from "@/api/api";
 
 export default {
+  namespaced: true,
   state: {
     transactions: [],
   },
@@ -51,8 +52,8 @@ export default {
       );
       state.transactions[index] = new Transaction(
         transaction.id,
-        transaction.date,
-        transaction.sum,
+        new Date(transaction.date),
+        +transaction.sum,
         transaction.title
       );
     },
@@ -60,20 +61,12 @@ export default {
 
   actions: {
     async fetchTransactions({ commit }) {
-      try {
-        const fetchData = await api.transactions();
-        commit("setTransactions", fetchData.transactions);
-      } catch (e) {
-        console.error(e);
-      }
+      const fetchData = await api.transactions();
+      commit("setTransactions", fetchData.transactions);
     },
     async postTransaction({ commit }, transaction) {
-      try {
-        const postedTransaction = await api.postTransaction(transaction);
-        commit("addTransaction",  postedTransaction.transaction);
-      } catch (e) {
-        console.error(e);
-      }
+      const postedTransaction = await api.postTransaction(transaction);
+      commit("addTransaction", postedTransaction.transaction);
     },
     async deleteTransaction({ commit }, id) {
       await api.deleteTransaction(id);

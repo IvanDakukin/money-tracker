@@ -15,11 +15,7 @@
         v-for="n in numberCellsStart"
         :key="n"
         :date="
-          new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            n - numberCellsStart
-          )
+          new Date(date.getFullYear(), date.getMonth(), n - numberCellsStart)
         "
       ></calendar-cell>
       <calendar-cell
@@ -60,7 +56,9 @@ export default {
         this.date.getMonth(),
         1
       ).getDay();
+
       if (firstDayOfWeek === 0) firstDayOfWeek = 7;
+      
       return firstDayOfWeek - 1;
     },
     numberCellsEnd() {
@@ -69,9 +67,11 @@ export default {
         this.date.getMonth() + 1,
         0
       ).getDay();
+
       if (lastDayOfMonth === 0) {
         lastDayOfMonth = 7;
       }
+
       return 7 - lastDayOfMonth;
     },
   },

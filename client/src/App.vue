@@ -1,4 +1,4 @@
-<template>
+ <template>
   <header class="header">
     <span
       class="material-symbols-outlined header__menu-btn"
@@ -18,7 +18,7 @@
         <ul>
           <li class="nav__item">Категории</li>
           <li class="nav__item">Кошельки</li>
-          <li class="nav__item">Регулярные платежи</li>
+          <li class="nav__item">Статистика</li>
         </ul>
       </nav>
     </aside>

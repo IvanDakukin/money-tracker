@@ -1,18 +1,18 @@
 <template>
   <div class="wrapper">
-    <div class="options">
+    <div class="tabs">
       <div
-        class="option"
-        :class="{ 'option--active': operationType === 'add' }"
+        class="tabs__element"
+        :class="{ 'tabs__element--active': operationType === 'add' }"
         @click="resetOperation"
       >
         Добавить
       </div>
       <div
-        class="option"
+        class="tabs__element"
         :class="{
-          'option--active': operationType === 'edit',
-          'option--disabled': operationType !== 'edit',
+          'tabs__element--active': operationType === 'edit',
+          'tabs__element--disabled': operationType !== 'edit',
         }"
       >
         Изменить
@@ -78,6 +78,7 @@ export default {
     initTransaction: Transaction,
     date: Date,
   },
+  
   methods: {
     handleSubmit() {
       // TODO: валидация формы
@@ -88,13 +89,15 @@ export default {
             ? +(+this.transaction.sum).toFixed(2)
             : -+(+this.transaction.sum).toFixed(2),
       };
+
       if (this.operationType == "add") {
-        this.$store.dispatch("postTransaction", transaction);
+        this.$store.dispatch("transactions/postTransaction", transaction);
       } else if (this.operationType == "edit") {
-        this.$store.dispatch("editTransaction", transaction);
+        this.$store.dispatch("transactions/editTransaction", transaction);
       }
       this.resetOperation();
     },
+
     resetOperation() {
       this.transaction = {
         sum: "",
@@ -121,23 +124,25 @@ export default {
   margin-left: auto;
   margin-right: 40px;
 }
-.options {
+.tabs {
   display: flex;
   background-color: $main-color;
-}
-.option {
-  color: $light-color;
-  padding: 7px 10px;
-  user-select: none;
-  cursor: pointer;
-  &--active {
-    border-bottom: 2px solid $light-color;
-    background-color: lighten($main-color, 7);
+
+  .tabs__element {
+    color: $light-color;
+    padding: 7px 10px;
+    user-select: none;
+    cursor: pointer;
+    &--active {
+      border-bottom: 2px solid $light-color;
+      background-color: lighten($main-color, 7);
+    }
+    &--disabled {
+      opacity: 0.3;
+    }
   }
-  &--disabled {
-    opacity: 0.3;
-  }
 }
+
 .form {
   padding: 15px 15px 1px 15px;
   width: 300px;

@@ -4,11 +4,11 @@
       <div class="date-wrapper" :class="{ 'date-wrapper--today': isToday }">
         {{ date.getDate() }}
       </div>
-      <div class="add-button">
+      <button class="add-button">
         <router-link class="date-link" :to="dayUrl">
           <span class="material-symbols-outlined"> data_saver_on </span>
         </router-link>
-      </div>
+      </button>
     </div>
     <div class="cell__transactions">
       <div class="income" v-if="sumIncome">{{ sumIncome }}</div>
@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     transactions() {
-      return this.$store.getters.transactionsForDay(this.date);
+      return this.$store.getters["transactions/transactionsForDay"](this.date);
     },
     dayUrl() {
       return `day/${+this.date}`;
@@ -76,11 +76,6 @@ export default {
   }
 }
 
-.date-link {
-  text-decoration: none;
-  color: inherit;
-}
-
 .add-button {
   @extend %tonal-button;
   opacity: 0;
@@ -88,6 +83,11 @@ export default {
   height: 26px;
   transition: opacity 0.2s;
   margin-right: 3px;
+
+  .date-link {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 .income,
 .expences {

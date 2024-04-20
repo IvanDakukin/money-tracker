@@ -1,26 +1,26 @@
 <template>
   <div class="main-content">
-    <div class="date-chose">
-      <div class="date-chose__item">
-        <span class="date-chose__year">{{ date.getFullYear() }}</span>
+    <div class="date-peeker">
+      <div class="date-peeker__item">
+        <span class="date-peeker__year">{{ date.getFullYear() }}</span>
       </div>
-      <div class="date-chose__item">
-        <button @click="switchToToday" class="date-chose__today">
+      <div class="date-peeker__item">
+        <button @click="switchToToday" class="date-peeker__today">
           Сегодня
         </button>
       </div>
-      <div class="date-chose__item">
-        <button @click="decreaseMonth" class="date-chose__arrow">
+      <div class="date-peeker__item">
+        <button @click="decreaseMonth" class="date-peeker__arrow">
           <span class="material-symbols-outlined"> keyboard_arrow_left </span>
         </button>
       </div>
-      <div class="date-chose__item">
-        <button @click="increaseMonth" class="date-chose__arrow">
+      <div class="date-peeker__item">
+        <button @click="increaseMonth" class="date-peeker__arrow">
           <span class="material-symbols-outlined"> keyboard_arrow_right </span>
         </button>
       </div>
-      <div class="date-chose__item">
-        <span class="date-chose__month">
+      <div class="date-peeker__item">
+        <span class="date-peeker__month">
           {{ month }}
         </span>
       </div>
@@ -81,7 +81,7 @@ export default {
   @extend %main-content;
 }
 
-.date-chose {
+.date-peeker {
   display: flex;
   margin-bottom: 15px;
   &__item {
@@ -89,7 +89,6 @@ export default {
   }
   &__year {
     margin-right: 20px;
-    line-height: 100%;
     font: {
       size: 30px;
       weight: bold;

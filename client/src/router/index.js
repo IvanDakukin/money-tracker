@@ -1,17 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
-import MainPage from "../views/MainPage.vue";
-import TransactionsView from "@/views/TransactionsView.vue";
+import CalendarPage from "../views/CalendarPage.vue";
+import DayTransactions from "@/views/DayTransactions.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
-    component: MainPage,
+    component: CalendarPage,
   },
   {
     path: "/day/:timestamp",
     name: "transactions",
-    component: TransactionsView,
+    component: DayTransactions,
     props: (route) => ({ date: new Date(+route.params.timestamp) }),
   },
 ];
